@@ -15,6 +15,7 @@
  */
 package com.example.bluetoothlechat.scan
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.bluetooth.*
 import android.bluetooth.le.*
@@ -66,6 +67,7 @@ class DeviceScanViewModel(app: Application) : AndroidViewModel(app) {
         stopScanning()
     }
 
+    @SuppressLint("MissingPermission")
     fun startScan() {
         // If advertisement is not supported on this device then other devices will not be able to
         // discover and connect to it.
@@ -91,6 +93,7 @@ class DeviceScanViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun stopScanning() {
         Log.d(TAG, "Stopping Scanning")
         scanner?.stopScan(scanCallback)
