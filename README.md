@@ -4,6 +4,8 @@ Android BluetoothLeChat Sample
 This sample shows how to implement two-way text chat over Bluetooth Low Energy between two Android devices, using
 all the fundamental Bluetooth LE API capabilities.
 
+Original source: https://github.com/android/connectivity-samples/tree/main/BluetoothLeChat
+
 Introduction
 ------------
 
