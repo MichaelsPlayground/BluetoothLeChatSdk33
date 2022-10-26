@@ -15,6 +15,7 @@
  */
 package com.example.bluetoothlechat.scan
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.view.View
 import android.widget.TextView
@@ -34,6 +35,7 @@ class DeviceScanViewHolder(
         itemView.setOnClickListener(this)
     }
 
+    @SuppressLint("MissingPermission")
     fun bind(device: BluetoothDevice) {
         bluetoothDevice = device
         name.text = device.name

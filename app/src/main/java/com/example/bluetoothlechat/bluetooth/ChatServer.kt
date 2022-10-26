@@ -15,6 +15,7 @@
  */
 package com.example.bluetoothlechat.bluetooth
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.bluetooth.*
 import android.bluetooth.le.AdvertiseCallback
@@ -107,11 +108,13 @@ object ChatServer {
         connectToChatDevice(device)
     }
 
+    @SuppressLint("MissingPermission")
     private fun connectToChatDevice(device: BluetoothDevice) {
         gattClientCallback = GattClientCallback()
         gattClient = device.connectGatt(app, false, gattClientCallback)
     }
 
+    @SuppressLint("MissingPermission")
     fun sendMessage(message: String): Boolean {
         Log.d(TAG, "Send a message")
         messageCharacteristic?.let { characteristic ->
@@ -137,6 +140,7 @@ object ChatServer {
      * This requires setting up the available services and characteristics that other devices
      * can read and modify.
      */
+    @SuppressLint("MissingPermission")
     private fun setupGattServer(app: Application) {
         gattServerCallback = GattServerCallback()
 
@@ -174,6 +178,7 @@ object ChatServer {
     /**
      * Start advertising this device so other BLE devices can see it and connect
      */
+    @SuppressLint("MissingPermission")
     private fun startAdvertisement() {
         advertiser = adapter.bluetoothLeAdvertiser
         Log.d(TAG, "startAdvertisement: with advertiser $advertiser")
@@ -188,6 +193,7 @@ object ChatServer {
     /**
      * Stops BLE Advertising.
      */
+    @SuppressLint("MissingPermission")
     private fun stopAdvertising() {
         Log.d(TAG, "Stopping Advertising with advertiser $advertiser")
         advertiser?.stopAdvertising(advertiseCallback)
@@ -234,6 +240,7 @@ object ChatServer {
      * Custom callback for the Gatt Server this device implements
      */
     private class GattServerCallback : BluetoothGattServerCallback() {
+        @SuppressLint("MissingPermission")
         override fun onConnectionStateChange(device: BluetoothDevice, status: Int, newState: Int) {
             super.onConnectionStateChange(device, status, newState)
             val isSuccess = status == BluetoothGatt.GATT_SUCCESS
@@ -249,6 +256,7 @@ object ChatServer {
             }
         }
 
+        @SuppressLint("MissingPermission")
         override fun onCharacteristicWriteRequest(
             device: BluetoothDevice,
             requestId: Int,
@@ -271,6 +279,7 @@ object ChatServer {
     }
 
     private class GattClientCallback : BluetoothGattCallback() {
+        @SuppressLint("MissingPermission")
         override fun onConnectionStateChange(gatt: BluetoothGatt, status: Int, newState: Int) {
             super.onConnectionStateChange(gatt, status, newState)
             val isSuccess = status == BluetoothGatt.GATT_SUCCESS
